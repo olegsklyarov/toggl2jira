@@ -89,7 +89,7 @@ def format_timedelta(duration: str):
 if __name__ == '__main__':
     jira = LoggingClient(JiraLibClient(JIRA_URL, JIRA_LOGIN, JIRA_PASSWORD), create_logger())
 
-    with open(sys.argv[1]) as fp:
+    with open(sys.argv[1], encoding='utf-8') as fp:
         file = csv.DictReader(fp)
         for row in file:
             task_raw = re.search('[A-Z]+-[0-9]+', row['Description'])
