@@ -7,6 +7,7 @@ import sys
 import re
 import pytz
 
+from math import ceil
 from jira import JIRA
 from json import loads
 
@@ -80,7 +81,7 @@ def format_timedelta(duration: str):
     delta = datetime.timedelta(hours=t.hour, minutes=t.minute, seconds=t.second)
 
     hours = int(delta.total_seconds() // 3600)
-    minutes = int((delta.total_seconds() - hours * 3600) // 60)
+    minutes = ceil((delta.total_seconds() - hours * 3600) / 60)
 
     return '{hours:02d}h {minutes:02d}m'.format(hours=hours, minutes=minutes)
 
