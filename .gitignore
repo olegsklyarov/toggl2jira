@@ -1,5 +1,5 @@
 .DS_Store
 .venv
 *.csv
-jira-reporting.log
+toggl2jira.log
 config.json
