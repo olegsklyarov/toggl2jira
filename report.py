@@ -3,13 +3,14 @@
 import datetime
 import logging
 import csv
-import sys
 import re
 import pytz
 
 from math import ceil
 from jira import JIRA
 from json import loads
+from glob import glob
+from sys import argv, exit
 
 JIRA_URL = ''
 JIRA_LOGIN = ''
@@ -24,6 +25,7 @@ with open('config.json') as configFile:
     JIRA_PASSWORD = config['JIRA_PASSWORD']
     JIRA_COM_TASK = config['JIRA_COM_TASK']
     LOG_FILE = config['LOG_FILE']
+    DOWNLOADS_PATH = config['DOWNLOADS_PATH']
 
 
 class Worklog:
@@ -86,10 +88,28 @@ def format_timedelta(duration: str):
     return '{hours:02d}h {minutes:02d}m'.format(hours=hours, minutes=minutes)
 
 
+def get_csv_file_name():
+    if (DOWNLOADS_PATH):
+        csv_files = glob(DOWNLOADS_PATH + '/*.csv')
+        if 1 == len(csv_files):
+            return csv_files[0]
+
+    if (len(argv) > 1):
+        return argv[1]
+
+    return None
+
+
 if __name__ == '__main__':
     jira = LoggingClient(JiraLibClient(JIRA_URL, JIRA_LOGIN, JIRA_PASSWORD), create_logger())
 
-    with open(sys.argv[1], encoding='utf-8') as fp:
+    csv_file_name = get_csv_file_name()
+
+    if (csv_file_name is None):
+        print('CSV file name not specified')
+        exit()
+
+    with open(csv_file_name, encoding='utf-8') as fp:
         file = csv.DictReader(fp)
         for row in file:
             task_raw = re.search('[A-Z]+-[0-9]+', row['Description'])
