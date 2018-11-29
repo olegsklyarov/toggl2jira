@@ -3,5 +3,6 @@
 	"JIRA_LOGIN": "login",
 	"JIRA_PASSWORD": "password",
 	"JIRA_COM_TASK": "COM-1",
-	"LOG_FILE": "toggl2jira.log"
+	"LOG_FILE": "toggl2jira.log",
+	"DOWNLOADS_PATH": ""
 }
