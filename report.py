@@ -11,6 +11,7 @@ from jira import JIRA
 from json import loads
 from glob import glob
 from sys import argv, exit
+from os import remove
 
 JIRA_URL = ''
 JIRA_LOGIN = ''
@@ -130,3 +131,4 @@ if __name__ == '__main__':
                 worklog.comment
             ))
             jira.report(worklog)
+    remove(csv_file_name)
