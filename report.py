@@ -18,6 +18,10 @@ JIRA_LOGIN = ''
 JIRA_PASSWORD = ''
 JIRA_COM_TASK = ''
 LOG_FILE = ''
+CSV_DURATION = ''
+CSV_DESCRIPTION = ''
+CSV_START_DATE = ''
+CSV_START_TIME = ''
 
 with open('config.json') as configFile:
     config = loads(configFile.read())
@@ -27,6 +31,11 @@ with open('config.json') as configFile:
     JIRA_COM_TASK = config['JIRA_COM_TASK']
     LOG_FILE = config['LOG_FILE']
     DOWNLOADS_PATH = config['DOWNLOADS_PATH']
+    CSV_DURATION = config['CSV_DURATION']
+    CSV_DESCRIPTION = config['CSV_DESCRIPTION']
+    CSV_START_DATE = config['CSV_START_DATE']
+    CSV_START_TIME = config['CSV_START_TIME']
+
 
 
 class Worklog:
@@ -113,16 +122,16 @@ if __name__ == '__main__':
     with open(csv_file_name, encoding='utf-8') as fp:
         file = csv.DictReader(fp)
         for row in file:
-            task_raw = re.search('[A-Z]+-[0-9]+', row['Description'])
+            task_raw = re.search('[A-Z]+-[0-9]+', row[ CSV_DESCRIPTION])
             task = JIRA_COM_TASK if task_raw is None else task_raw.group(0)
             worklog = Worklog(
                 datetime.datetime.strptime(
-                    "{}T{}+0300".format(row['Start date'], row['Start time']),  # Захардкоженный часовой пояс
+                    "{}T{}+0300".format(row[CSV_START_DATE], row[CSV_START_TIME]),  # Захардкоженный часовой пояс
                     '%Y-%m-%dT%H:%M:%S%z'
                 ).astimezone(pytz.utc),
                 task,
-                format_timedelta(row['Duration']),
-                re.sub("\s*{}\s*".format(task), '', row['Description'])
+                format_timedelta(row[CSV_DURATION]),
+                re.sub("\s*{}\s*".format(task), '', row[CSV_DESCRIPTION])
             )
             print("Задача: {}\nВремя: {} ({})\nКомментарий: {}\n".format(
                 worklog.task_id,

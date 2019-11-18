@@ -4,5 +4,9 @@
 	"JIRA_PASSWORD": "password",
 	"JIRA_COM_TASK": "COM-1",
 	"LOG_FILE": "toggl2jira.log",
-	"DOWNLOADS_PATH": ""
+	"DOWNLOADS_PATH": "",
+	"CSV_DURATION": "Duration (h)",
+	"CSV_DESCRIPTION": "Description",
+	"CSV_START_DATE": "Start Date",
+	"CSV_START_TIME": "Start Time"
 }
