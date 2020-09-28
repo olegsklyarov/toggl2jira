@@ -123,7 +123,7 @@ if __name__ == '__main__':
     with open(csv_file_name, encoding='utf-8') as fp:
         file = csv.DictReader(fp)
         for row in file:
-            task_raw = re.search('[A-Z]+-[0-9]+', row[ CSV_DESCRIPTION])
+            task_raw = re.search('^[A-Z]+-[0-9]+', row[ CSV_DESCRIPTION])
             task = JIRA_COM_TASK if task_raw is None else task_raw.group(0)
             worklog = Worklog(
                 datetime.datetime.strptime(
