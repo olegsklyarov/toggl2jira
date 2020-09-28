@@ -101,6 +101,7 @@ def format_timedelta(duration: str):
 def get_csv_file_name():
     if (DOWNLOADS_PATH):
         csv_files = glob(DOWNLOADS_PATH + '/*.csv')
+        print(csv_files)
         if 1 == len(csv_files):
             return csv_files[0]
 
