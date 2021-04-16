@@ -3,3 +3,4 @@
 *.csv
 toggl2jira.log
 config.json
+config.json.backup
