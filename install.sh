@@ -5,4 +5,5 @@ source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 deactivate
+cp config.json config.json.backup
 cp config.sample.json config.json
