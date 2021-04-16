@@ -127,7 +127,7 @@ if __name__ == '__main__':
             task = JIRA_COM_TASK if task_raw is None else task_raw.group(0)
             worklog = Worklog(
                 datetime.datetime.strptime(
-                    "{}T{}+0300".format(row[CSV_START_DATE], row[CSV_START_TIME]),  # Захардкоженный часовой пояс
+                    "{}T{}:00+0300".format(row[CSV_START_DATE], row[CSV_START_TIME]),  # Захардкоженный часовой пояс
                     '%Y-%m-%dT%H:%M:%S%z'
                 ).astimezone(pytz.utc),
                 task,
