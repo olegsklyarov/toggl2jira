@@ -9,7 +9,7 @@ idna==3.3
 importlib-metadata==4.11.2
 jira==3.1.1
 keyring==23.5.0
-oauthlib==3.2.0
+oauthlib==3.2.2
 pbr==5.8.1
 pycparser==2.21
 PyJWT==2.3.0
